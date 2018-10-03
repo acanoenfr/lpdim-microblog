@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block content %}
+    <h1>Home</h1>
+    <div class="row">
+        <div class="col-md-6">
+            {% if app.user %}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button type="submit" class="btn btn-success">Publish it</button>
+                {{ form_end(form) }}
+            {% else %}
+                <p class="lead">Please connect you before posting messages.</p>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            {% if not posts %}
+                <p class="lead">There are no posts available.</p>
+            {% else %}
+                {% for post in posts %}
+                    <blockquote class="blockquote">
+                        <p class="mb-0">{{ post.content }}</p>
+                        <footer class="blockquote-footer">
+                            Ecrit par {{ post.author.username }} le {{ post.createdAt | date('d/m/Y à H:i') }}
+                            {% if app.user %}
+                                <a href="{{ path('blog_edit', {'id': post.id}) }}">Edit</a>
+                                <a href="{{ path('blog_delete', {'id': post.id}) }}">Delete</a>
+                            {% endif %}
+                        </footer>
+                    </blockquote>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

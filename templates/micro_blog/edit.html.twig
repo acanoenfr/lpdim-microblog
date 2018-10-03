@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block content %}
+    <h1>Edit the post n°{{ post.id }}</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-warning">Save it</button>
+    <a href="{{ path('blog_index') }}">Cancel</a>
+    {{ form_end(form) }}
+{% endblock %}

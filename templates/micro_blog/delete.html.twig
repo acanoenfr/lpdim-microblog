@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <h1>Delete the post n°{{ post.id }}</h1>
+    <form action="" method="post">
+        <button type="submit" name="submit" class="btn btn-danger">Delete it</button>
+        <a href="{{ path('blog_index') }}">Cancel</a>
+    </form>
+{% endblock %}
